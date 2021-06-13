@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">worktest</string>
+    <string name="loading">載入中</string>
+    <string name="input">請輸入密碼</string>
+    <string name="prompt_email">請輸入Email</string>
+    <string name="birth">出生年月日:</string>
+    <string name="date">年/月/日(左上調年度)</string>
+    <string name="gender">性別:</string>
+    <string name="sign_up">註冊</string>
+    <string name="sign_in">登入</string>
+    <string name="address">居住地:</string>
+    <string name="taste">討厭的食物:</string>
+    <string name="maccount">輸入欲加入的帳號</string>
+    <string name="city">縣/市</string>
+    <string name="town">鄉/鎮/市/區</string>
+    />
+</resources>
