@@ -70,15 +70,5 @@
             android:textSize="25sp"
             app:backgroundTint="#6FC0E4" />
 
-        <Button
-            android:id="@+id/sign_out"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="25dp"
-            android:text="登出"
-            android:layout_gravity="center_horizontal"
-            android:textSize="25sp"
-            app:backgroundTint="#9C7ADA" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

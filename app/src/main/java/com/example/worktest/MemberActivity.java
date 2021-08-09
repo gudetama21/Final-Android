@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,20 +49,7 @@ public class MemberActivity extends AppCompatActivity {
                 }
             }
         });
-        //登出
-        Button sign_out = findViewById(R.id.sign_out);
-        sign_out.setOnClickListener(v -> new Thread(new Runnable() {
 
-            public void run() {
-                Intent intent = new Intent();
-                intent.setClass(MemberActivity.this, MainActivity.class);
-                SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.clear();
-                editor.apply();
-                startActivity(intent);
-            }
-        }).start());
     }
 
     private Button.OnClickListener change_btn = new Button.OnClickListener() {
@@ -113,4 +102,35 @@ public class MemberActivity extends AppCompatActivity {
             }).start();
         }
     };
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 設置要用哪個menu檔做為選單
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.sign_out:
+                Intent intent = new Intent();
+                intent.setClass(MemberActivity.this, MainActivity.class);
+                SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();
+                editor.apply();
+                startActivity(intent);
+                break;
+
+            case R.id.change:
+                Intent i = new Intent();
+                i.setClass(MemberActivity.this, MemberActivity.class);
+                i.putExtra("email",i.getStringExtra("email"));
+                i.putExtra("id", i.getStringExtra("id"));
+                startActivity(i);
+                break;
+        }
+        return true;
+    }
 }
+
