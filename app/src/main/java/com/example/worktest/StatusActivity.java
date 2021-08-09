@@ -98,15 +98,17 @@ public class StatusActivity extends AppCompatActivity {
                         MysqlCon con = new MysqlCon();
                         Intent i =getIntent();
                         String email = i.getStringExtra("email");
+                        String id = i.getStringExtra("id");
                         final RadioButton r = findViewById(radio.getCheckedRadioButtonId());
 
                         con.insertInfo(email, bday, r.getText().toString(),city,town,b1,b2,b3,b4,b5,b6);
 
                         toast = Toast.makeText(getApplicationContext(), "註冊完成", Toast.LENGTH_SHORT);
-
+                        //換頁面，將帳號往後送
                         Intent intent = new Intent();
-                        intent.setClass(StatusActivity.this, MemberActivity.class);
+                        intent.setClass(StatusActivity.this, TableActivity.class);
                         intent.putExtra("email",email);
+                        intent.putExtra("id", id);
                         startActivity(intent);
                     }
                     else{

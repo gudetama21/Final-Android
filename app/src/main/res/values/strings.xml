@@ -13,5 +13,8 @@
     <string name="maccount">輸入欲加入的帳號</string>
     <string name="city">縣/市</string>
     <string name="town">鄉/鎮/市/區</string>
+    <string name="oldpass">輸入原密碼</string>
+    <string name="newpass">輸入新密碼</string>
+    <string name="newpass2">再輸入新密碼</string>
     />
 </resources>

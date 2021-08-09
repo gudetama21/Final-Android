@@ -17,13 +17,68 @@
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-47dp">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/LinearLayout_v2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginTop="180dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="110dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/oldpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:inputType="textPassword"
+                android:hint="@string/oldpass"
+                android:textColor="#000000"
+                android:textSize="27sp" />
+
+            <EditText
+                android:id="@+id/newpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:inputType="textPassword"
+                android:hint="@string/newpass"
+                android:textColor="#000000"
+                android:textSize="27sp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/newpass2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:inputType="textPassword"
+                android:hint="@string/newpass2"
+                android:textColor="#000000"
+                android:textSize="27sp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:text="確定"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            app:backgroundTint="#6FC0E4" />
+
+        <Button
+            android:id="@+id/sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:text="登出"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            app:backgroundTint="#9C7ADA" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

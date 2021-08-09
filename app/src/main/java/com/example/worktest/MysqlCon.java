@@ -6,10 +6,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MysqlCon {
 
-    String mysql_ip = "192.168.1.108";
+    String mysql_ip = "192.168.1.113";
     int mysql_port = 3306; // Port 預設為 3306
     String db_name = "test?characterEncoding=utf-8";
     String url = "jdbc:mysql://"+mysql_ip+":"+mysql_port+"/"+db_name;
@@ -50,6 +51,7 @@ public class MysqlCon {
                 String password = rs.getString("password");
                 data += id + ": " + email+ " " + password + "\n";
             }
+            rs.close();
             st.close();
             con.close();
         } catch (SQLException e) {
@@ -57,6 +59,7 @@ public class MysqlCon {
         }
         return data;
     }
+
     public boolean insertData(String email, String password) {
         try {
             con = DriverManager.getConnection(url, db_user, db_password);
@@ -132,23 +135,47 @@ public class MysqlCon {
         }
     }
 
-    public boolean insertInfo(String email, String birthday, String gender, String city, String town, int b1,int b2,int b3,int b4,int b5,int b6) {
+    public boolean checkInfo(String email) {
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            Statement st = con.createStatement();
+            String check = "SELECT `email` FROM `info` WHERE email=\'" + email + "\'";
+            ResultSet rs = st.executeQuery(check);
+
+            if(!rs.next()) {
+                rs.close();
+                st.close();
+                con.close();
+                return false;
+            }
+            rs.close();
+            st.close();
+            con.close();
+            Log.v("DB", "資料確認符合");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void insertInfo(String email, String birthday, String gender, String city, String town, int b1,int b2,int b3,int b4,int b5,int b6) {
         try {
             con = DriverManager.getConnection(url, db_user, db_password);
             Statement st = con.createStatement();
             String sql = "INSERT INTO `info` (`email`, `birthday`, `gender`, `city`, `town`,`蔥`, "
-            +"`蒜`, `洋蔥`, `薑`, `香菜`, `芹菜`) "
-            +"VALUES ('"+ email +"', '"+ birthday +"','"+ gender+"','"+ city +"','"+ town + "',"+b1+","+b2+","+b3+","+b4+","+b5+","+b6+")";
+                +"`蒜`, `洋蔥`, `薑`, `香菜`, `芹菜`) "
+                +"VALUES ('"+ email +"', '"+ birthday +"','"+ gender+"','"+ city +"','"+ town + "',"
+                    +b1+","+b2+","+b3+","+b4+","+b5+","+b6+")";
             st.executeUpdate(sql);
+
             st.close();
             con.close();
             Log.v("DB", "寫入資料完成：" + email);
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             Log.e("DB", "寫入資料失敗");
             Log.e("DB", e.toString());
-            return false;
         }
     }
 
@@ -176,4 +203,85 @@ public class MysqlCon {
         }
     }
 
+    public void changeCusPass(String oldpass, String newpass){
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            Statement st = con.createStatement();
+            String sql = "UPDATE `test` SET `password`=\'" + newpass + "\'WHERE password=\'" + oldpass + "\'";
+            st.executeUpdate(sql);
+
+            st.close();
+            con.close();
+            Log.v("DB", "密碼修改完成");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeResPass(String oldpass, String newpass){
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            Statement st = con.createStatement();
+            String sql = "UPDATE `restaurant` SET `password`=\'" + newpass + "\'WHERE password=\'" + oldpass + "\'";
+            st.executeUpdate(sql);
+
+            st.close();
+            con.close();
+            Log.v("DB", "密碼修改完成");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertFri(String host, String friend){
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            Statement st = con.createStatement();
+            String sql = "INSERT INTO `friends` (`host`,`friend`) VALUES ('" + host + "','" + friend + "')";
+            st.executeUpdate(sql);
+
+            st.close();
+            con.close();
+            Log.v("DB", "寫入資料完成：" + host);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.e("DB", "寫入資料失敗");
+            Log.e("DB", e.toString());
+        }
+    }
+
+    public ArrayList<String> getFri(String host) {
+        ArrayList<String> data = new ArrayList<>();
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            String sql = "SELECT `friend` FROM `friends` WHERE host=\'" + host + "\'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                data.add(rs.getString("friend"));
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void delFri(String host, String friend){
+        try {
+            con = DriverManager.getConnection(url, db_user, db_password);
+            Statement st = con.createStatement();
+            String sql = "DELETE FROM `friends` WHERE `host`=\'" + host + "\' AND friend=\'" + friend + "\'";
+            st.executeUpdate(sql);
+
+            st.close();
+            con.close();
+            Log.v("DB", "刪除完成");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

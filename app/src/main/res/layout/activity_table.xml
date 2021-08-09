@@ -54,15 +54,36 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
 
-        <Button
-            android:id="@+id/send"
+        <LinearLayout
+            android:id="@+id/LinearLayout_h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="推薦"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:textSize="27sp"
-            app:backgroundTint="#6FC0E4"/>
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
+                android:text="刪除"
+                android:textSize="27sp"
+                app:backgroundTint="@android:color/holo_red_light" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推薦"
+                android:layout_gravity="center_horizontal"
+                android:textSize="27sp"
+                app:backgroundTint="#6FC0E4"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
